@@ -1,0 +1,82 @@
+my-business-site/
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Classic cyber nakuru</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header>
+    <div class="logo">Classic Cyber Sec 58</div>
+    <nav>
+      <a href="#home">Home</a>
+      <a href="#services">Services</a>
+      <a href="#about">About</a>
+      <a href="#contact">Contact</a>
+    </nav>
+  </header>
+
+  <section id="home" class="hero">
+  	<h4 style="color: yellow ; font-style: 50;"> <marquee scrollamount="8" direction="left">CLASSIC CYBER NAKURU</marquee></h4>
+    <h1 style="color:darkred;">We Help You Get Best services</h1>
+    <p>classic cyber gives you best services in or out of your presence and delivery made quickily where payment is made upon delivery of service offered.
+    It also allows you to learn many skills in ICT like packages, graphic designs and coding skills at Affordable and negotiatable price.
+     .</p>
+    <a href="#contact" class="btn">Get a Quote</a>
+  </section>
+
+  <section id="services">
+    <h2 style="color: red">Our Services</h2>
+    <div class="service-grid">
+      <div class="service-card">
+        <h3>Offline Cyber Services</h3>
+        <p>we offer services like Typesetting, Printing, Scanning, Photocopying, Binding, 
+    	Lamination,, Photo printing, Graphics design, Stickers, Flyers, 
+    	Passport photos & .</p>
+      </div>
+      <div class="service-card">
+        <h3>Online Cyber Services</h3>
+        <p>K.R.A certificate, SHA Number, Passport application and E-citizen services eg.Good conduct,Driving licence, Certificate for persons with Disabilities among others.</p>
+      </div>
+
+      <div class="service-card">
+        <h3>Graphic Design</h3>
+        <p>We offer graphics services in fields like coreldraw, Adobe photoshop among others.</p>
+      </div>
+
+      <div class="service-card">
+        <h3>Skills</h3>
+        <p>We equip and offer cyber skills where one can be able to learn packages, graphics and coding skills to allow them work anywhere with this skills.</p>
+      </div>
+
+    </div>
+  </section>
+
+  <section id="about">
+    <h2 style="color:darkred;">About Us</h2>
+    <p>We’re a dedicated to help customers get quality cyber services even in bulky .</p>
+  </section>
+
+  <section id="contact">
+    <h2 style="color:darkred;">Contact Us</h2>
+    <form>
+      <input type="text" placeholder="Your Name" required>
+      <input type="email" placeholder="Your Email" required>
+      <textarea placeholder="Your Message" required></textarea>
+      <button type="submit">Send Message</button>
+    </form>
+  </section>
+
+  <footer>
+    <p>© 2025 Classic Cyber Nakuru| All Rights Reserved</p>
+  </footer>
+
+  <script src="script.js"></script>
+
+
+
+</body>
+</html>
