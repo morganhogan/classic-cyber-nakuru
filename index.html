@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Classic Cyber Nakuru | Contact Us</title>
+  <style>
+    body { font-family: Arial, sans-serif; background: #f5f5f5; margin: 0; padding: 20px; }
+    .card { max-width: 600px; margin: 40px auto; background: #fff; padding: 20px; border-radius: 8px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); }
+    h1 { color: darkred; text-align: center; }
+    form { display: flex; flex-direction: column; gap: 10px; }
+    input, textarea { padding: 10px; border: 1px solid #ccc; border-radius: 5px; font-size: 15px; }
+    button { padding: 10px; background: darkred; color: #fff; border: none; border-radius: 5px; cursor: pointer; font-size: 16px; }
+    .message { text-align: center; margin-top: 15px; }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <h1>Contact Classic Cyber Nakuru</h1>
+    <form id="contactForm" action="send-sms.php" method="POST">
+      <input type="text" name="name" placeholder="Your Name" required />
+      <input type="email" name="email" placeholder="Your Email" required />
+      <textarea name="message" placeholder="Your Message" required></textarea>
+      <button type="submit">Send Message</button>
+    </form>
+    <div class="message">
+      <?php
+      if (isset($_GET['status']) && $_GET['status'] === 'success') {
+        echo "<p style='color:green;'>Message sent successfully!</p>";
+      } elseif (isset($_GET['status']) && $_GET['status'] === 'error') {
+        echo "<p style='color:red;'>Failed to send message. Try again.</p>";
+      }
+      ?>
+    </div>
+  </div>
+</body>
+</html>
+
+
+<?php
+// ===== CONFIGURE THESE =====
+$api_token = 'XNiKXQXpVBLHtjVpJ89dqqUcW6K0BPJHYJmOUpoPmM9NUQSF1qPn9UypVxBv';     // <-- Replace with your MobileSasa token
+$recipient = '254743161588';            // <-- Replace with your phone number
+$sender_id = 'MOBILESASA';              // <-- Must match registered sender ID
+
+if ($_SERVER["REQUEST_METHOD"] === "POST") {
+  $name = htmlspecialchars($_POST['name']);
+  $email = htmlspecialchars($_POST['email']);
+  $message = htmlspecialchars($_POST['message']);
+
+  $sms_text = "New Contact from Classic Cyber Nakuru:\nName: $name\nEmail: $email\nMessage: $message";
+
+  $payload = [
+    "senderID" => $sender_id,
+    "message" => $sms_text,
+    "phone" => $recipient
+  ];
+
+  $ch = curl_init("https://api.mobilesasa.com/v1/send/message");
+  curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+  curl_setopt($ch, CURLOPT_POST, true);
+  curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($payload));
+  curl_setopt($ch, CURLOPT_HTTPHEADER, [
+    "Content-Type: application/json",
+    "Authorization: Bearer $api_token"
+  ]);
+
+  $response = curl_exec($ch);
+  $httpCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+  curl_close($ch);
+
+  // Decode provider response
+  $result = json_decode($response, true);
+
+  if ($httpCode === 200 && isset($result['status']) && ($result['status'] === true || $result['status'] === 'success')) {
+    header("Location: index.html?status=success");
+  } else {
+    header("Location: index.html?status=error");
+  }
+  exit;
+}
+?>
